@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en-AU"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Freedom Flow Counselling and Yoga</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+/* Layout: one narrow, calm column. Home = who + one button. Booking = one page that fills in top to bottom. */
+:root {
+  --bg: #f5f6f0;
+  --surface: #ffffff;
+  --ink: #1f241a;
+  --muted: #646b5a;
+  --line: #dcdfd0;
+  --sage: #8a965c;
+  --sage-deep: #5f6b3a;
+  --sage-soft: #e8ecda;
+  --on-deep: #ffffff;
+  --font-body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151712; --surface: #1d2018; --ink: #eceee4; --muted: #a6ab98; --line: #33382a;
+    --sage: #a3af74; --sage-deep: #c3cd96; --sage-soft: #283019; --on-deep: #151712;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #151712; --surface: #1d2018; --ink: #eceee4; --muted: #a6ab98; --line: #33382a;
+  --sage: #a3af74; --sage-deep: #c3cd96; --sage-soft: #283019; --on-deep: #151712;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 640px; margin: 0 auto; padding-block: 24px 48px; }
+a { color: var(--sage-deep); }
+:focus-visible { outline: 2px solid var(--sage-deep); outline-offset: 2px; border-radius: 8px; }
+h1, h2 { margin: 0; font-weight: 500; text-wrap: balance; }
+p { margin: 0; }
+
+.btn {
+  appearance: none; border: 0; border-radius: 999px; cursor: pointer; text-decoration: none; text-align: center;
+  font: 600 17px/1 var(--font-body); padding: 17px 28px; display: inline-block;
+  background: var(--sage-deep); color: var(--on-deep);
+}
+.btn:hover { background: var(--sage); }
+.btn.wide { display: block; width: 100%; }
+.btn[disabled] { opacity: .4; cursor: not-allowed; }
+.link { appearance: none; background: none; border: 0; padding: 0; font: inherit; color: var(--sage-deep); text-decoration: underline; cursor: pointer; }
+
+/* home */
+.home { text-align: center; display: grid; justify-items: center; gap: 18px; padding-top: 24px; }
+.photo { width: 180px; height: 180px; max-width: 100%; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 6px var(--bg), 0 0 0 7.5px var(--sage); }
+.home h1 { font-family: var(--font-display); font-size: clamp(32px, 7vw, 44px); line-height: 1.1; margin-top: 8px; }
+.home .lead { color: var(--muted); }
+.contact { margin-top: 28px; color: var(--muted); font-size: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 18px; }
+.contact a { text-decoration: none; font-weight: 600; }
+
+/* booking */
+.back { display: inline-block; margin-bottom: 18px; font-size: 15px; text-decoration: none; }
+.book h1 { font-family: var(--font-display); font-size: clamp(30px, 6vw, 38px); margin-bottom: 26px; }
+.q { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; margin-bottom: 14px; }
+.q h2 { font: 600 18px var(--font-body); margin-bottom: 14px; }
+.q.off { opacity: .45; }
+.q.off .pick, .q.off input { pointer-events: none; }
+
+.pick { display: flex; flex-wrap: wrap; gap: 8px; }
+.pick button {
+  appearance: none; font: 600 16px var(--font-body); color: var(--ink); background: transparent; cursor: pointer;
+  border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 16px; font-variant-numeric: tabular-nums;
+}
+.pick button:hover { border-color: var(--sage); }
+.pick button[aria-pressed="true"] { background: var(--sage-deep); border-color: var(--sage-deep); color: var(--on-deep); }
+.pick.stack { flex-direction: column; }
+.pick.stack button { text-align: left; display: flex; justify-content: space-between; gap: 12px; }
+.pick.stack span { font-weight: 400; opacity: .8; }
+.days, #times { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#times .hint, .days .hint { grid-column: 1 / -1; }
+.days small { display: block; font-weight: 400; font-size: 13px; opacity: .8; }
+
+.hint { font-size: 14.5px; color: var(--muted); margin-top: 12px; }
+.tz select { font: inherit; font-size: 15px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; margin-top: 8px; max-width: 100%; }
+
+.fields { display: grid; gap: 12px; }
+.fields label { display: grid; gap: 6px; font-size: 15px; font-weight: 600; }
+.fields .opt { font-weight: 400; color: var(--muted); }
+.fields textarea { resize: vertical; min-height: 90px; }
+.fields input, .fields textarea { font: 400 17px var(--font-body); color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 13px 14px; width: 100%; }
+
+.done { text-align: center; display: grid; gap: 12px; margin-top: 8px; }
+.done .sum { font-size: 16px; }
+.done .sum b { display: block; font-size: 18px; }
+.done .small { font-size: 14.5px; color: var(--muted); }
+.toast { color: var(--sage-deep); font-weight: 600; font-size: 15px; min-height: 1.4em; }
+</style>
+</head><body>
+
+
+<div class="wrap" id="site">
+  <!-- HOME -->
+  <main id="view-home" class="home">
+    <img class="photo" src="sarah.jpg" alt="Sarah Sheffield">
+    <h1>Freedom Flow Counselling and Yoga</h1>
+    <p class="lead">With Sarah Sheffield, Melbourne</p>
+    <a class="btn" href="#book">Book a session</a>
+    <div class="contact">
+      <a href="tel:+61411574180">0411 574 180</a>
+      <a href="https://www.facebook.com/www.freedomflowcounsellingandyoga.com.au/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.instagram.com/freedomflowcounsellingandyoga/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </main>
+
+  <!-- BOOKING -->
+  <main id="view-book" class="book" hidden>
+    <a class="back" href="#home">← Back</a>
+    <h1>Book a session</h1>
+
+    <div class="q" id="q1">
+      <h2>1. What would you like?</h2>
+      <div class="pick stack" id="services"></div>
+    </div>
+
+    <div class="q" id="q2">
+      <h2>2. Pick a day</h2>
+      <div class="pick days" id="days"></div>
+      <p class="hint" id="more-wrap"><button class="link" id="more" type="button">Show more days</button></p>
+    </div>
+
+    <div class="q" id="q3">
+      <h2>3. Pick a time</h2>
+      <div class="pick" id="times"></div>
+      <div class="hint tz" id="tz"></div>
+    </div>
+
+    <div class="q" id="q4">
+      <h2>4. Your details</h2>
+      <div class="fields">
+        <label for="f-name">Name <input id="f-name" autocomplete="name"></label>
+        <label for="f-phone">Mobile <input id="f-phone" type="tel" autocomplete="tel"></label>
+        <label for="f-notes">Anything Sarah should know? <span class="opt">(optional)</span> <textarea id="f-notes" rows="3"></textarea></label>
+        <input id="f-website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+      </div>
+      <div hidden>
+      </div>
+    </div>
+
+    <button class="btn wide" id="send" type="button" disabled>Send booking request</button>
+    <div class="done" id="done" hidden></div>
+  </main>
+</div>
+
+<script>
+/* ---------- Sarah's settings ---------- */
+const SARAH_TZ = "Australia/Melbourne";
+const SARAH_SMS = "+61411574180";
+const SERVICES = [
+  { id: "counselling", name: "Counselling", mins: 50 },
+  { id: "yoga", name: "Private yoga", mins: 60 },
+  { id: "both", name: "Counselling and yoga", mins: 90 },
+  { id: "intro", name: "Free intro call", mins: 15 }
+];
+const HOURS = { 1: [9, 17], 2: [9, 17], 3: [9, 17], 4: [9, 17], 5: [9, 17], 6: [9, 12] }; // Melbourne time, 0 = Sunday
+const DAYS_AHEAD = 42;
+const MIN_NOTICE_HOURS = 12;
+
+/* ---------- time zone helpers ---------- */
+function tzOffsetMin(date, tz) {
+  const p = new Intl.DateTimeFormat("en-US", { timeZone: tz, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" }).formatToParts(date);
+  const g = t => +p.find(x => x.type === t).value;
+  return (Date.UTC(g("year"), g("month") - 1, g("day"), g("hour"), g("minute"), g("second")) - date.getTime()) / 60000;
+}
+function zonedToDate(y, m, d, h, mi, tz) {
+  const guess = Date.UTC(y, m, d, h, mi);
+  let off = tzOffsetMin(new Date(guess), tz);
+  off = tzOffsetMin(new Date(guess - off * 60000), tz);
+  return new Date(guess - off * 60000);
+}
+function partsIn(date, tz) {
+  const p = new Intl.DateTimeFormat("en-US", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit" }).formatToParts(date);
+  const g = t => p.find(x => x.type === t).value;
+  return { y: +g("year"), m: +g("month") - 1, d: +g("day"), key: `${g("year")}-${g("month")}-${g("day")}` };
+}
+const fmt = (date, tz, o) => new Intl.DateTimeFormat("en-AU", { timeZone: tz, ...o }).format(date);
+const timeStr = (d, tz) => fmt(d, tz, { hour: "numeric", minute: "2-digit" });
+const dayLong = (d, tz) => fmt(d, tz, { weekday: "long", day: "numeric", month: "long" });
+const placeName = tz => tz.split("/").pop().replace(/_/g, " ");
+
+function buildSlots(svc) {
+  const step = svc.mins <= 15 ? 30 : 60;
+  const earliest = Date.now() + MIN_NOTICE_HOURS * 3600000;
+  const start = partsIn(new Date(), SARAH_TZ);
+  const out = [];
+  for (let i = 0; i <= DAYS_AHEAD; i++) {
+    const p = partsIn(zonedToDate(start.y, start.m, start.d + i, 12, 0, SARAH_TZ), SARAH_TZ);
+    const hrs = HOURS[new Date(Date.UTC(p.y, p.m, p.d)).getUTCDay()];
+    if (!hrs) continue;
+    for (let t = hrs[0] * 60; t + svc.mins <= hrs[1] * 60; t += step) {
+      const at = zonedToDate(p.y, p.m, p.d, Math.floor(t / 60), t % 60, SARAH_TZ);
+      if (at.getTime() >= earliest) out.push(at);
+    }
+  }
+  return out;
+}
+
+/* ---------- state ---------- */
+let myTz = "Australia/Melbourne";
+try { myTz = Intl.DateTimeFormat().resolvedOptions().timeZone || myTz; } catch (e) {}
+const st = { svc: null, day: null, slot: null, showDays: 10, tzOpen: false };
+const $ = s => document.querySelector(s);
+function btn(label, pressed, onclick, sub) {
+  const b = document.createElement("button");
+  b.type = "button"; b.setAttribute("aria-pressed", String(!!pressed));
+  b.append(label);
+  if (sub) { const s = document.createElement(sub.tag || "small"); s.textContent = sub.text; b.append(s); }
+  b.addEventListener("click", onclick);
+  return b;
+}
+
+function render() {
+  const svc = SERVICES.find(s => s.id === st.svc);
+
+  // 1. service
+  const sv = $("#services"); sv.textContent = "";
+  for (const s of SERVICES) sv.append(btn(s.name, st.svc === s.id, () => { st.svc = s.id; st.day = null; st.slot = null; render(); }, { tag: "span", text: `${s.mins} min` }));
+
+  // group slots by the visitor's own day
+  const byDay = new Map();
+  if (svc) for (const s of buildSlots(svc)) { const k = partsIn(s, myTz).key; if (!byDay.has(k)) byDay.set(k, []); byDay.get(k).push(s); }
+
+  // 2. day
+  $("#q2").classList.toggle("off", !svc);
+  const dv = $("#days"); dv.textContent = "";
+  const keys = [...byDay.keys()];
+  for (const k of keys.slice(0, st.showDays)) {
+    const first = byDay.get(k)[0];
+    dv.append(btn(fmt(first, myTz, { weekday: "short" }), st.day === k, () => { st.day = k; st.slot = null; render(); }, { text: fmt(first, myTz, { day: "numeric", month: "short" }) }));
+  }
+  if (!svc) dv.append(Object.assign(document.createElement("p"), { className: "hint", textContent: "Choose a session first." }));
+  $("#more-wrap").hidden = !svc || keys.length <= st.showDays;
+
+  // 3. time
+  $("#q3").classList.toggle("off", !st.day);
+  const tv = $("#times"); tv.textContent = "";
+  if (st.day && byDay.has(st.day)) {
+    for (const s of byDay.get(st.day)) tv.append(btn(timeStr(s, myTz), st.slot && st.slot.getTime() === s.getTime(), () => { st.slot = s; render(); }));
+  } else tv.append(Object.assign(document.createElement("p"), { className: "hint", textContent: "Choose a day first." }));
+
+  // time zone line
+  const tz = $("#tz"); tz.textContent = "";
+  tz.append(`Times are shown in your time (${placeName(myTz)}). `);
+  if (st.slot && myTz !== SARAH_TZ) tz.append(`That's ${timeStr(st.slot, SARAH_TZ)} in Melbourne. `);
+  const ch = document.createElement("button"); ch.className = "link"; ch.type = "button"; ch.textContent = "Change";
+  ch.addEventListener("click", () => { st.tzOpen = !st.tzOpen; render(); });
+  tz.append(ch);
+  if (st.tzOpen) {
+    let zones = []; try { zones = Intl.supportedValuesOf("timeZone"); } catch (e) {}
+    const sel = document.createElement("select"); sel.id = "tz-select"; sel.setAttribute("aria-label", "Your time zone");
+    for (const z of [...new Set([myTz, "Australia/Melbourne", "Australia/Sydney", "Australia/Brisbane", "Australia/Adelaide", "Australia/Perth", ...zones])]) {
+      const o = document.createElement("option"); o.value = z; o.textContent = z.replace(/_/g, " "); if (z === myTz) o.selected = true; sel.append(o);
+    }
+    sel.addEventListener("change", () => { myTz = sel.value; st.day = null; st.slot = null; st.tzOpen = false; render(); });
+    tz.append(document.createElement("br"), sel);
+  }
+
+  // 4. details + send
+  $("#q4").classList.toggle("off", !st.slot);
+  $("#send").disabled = !ready();
+}
+
+function ready() { return st.slot && $("#f-name").value.trim() && $("#f-phone").value.replace(/\D/g, "").length >= 8; }
+["#f-name", "#f-phone"].forEach(id => $(id).addEventListener("input", () => { $("#send").disabled = !ready(); }));
+
+$("#more").addEventListener("click", () => { st.showDays += 10; render(); });
+
+// Bookings go to Sarah's phone through Make (Make texts her a Confirm link).
+const BOOKING_HOOK = "https://hook.eu1.make.com/efplvgcdevofiwziyrt5w3d7qa8jhvk4";
+
+function toE164(raw) {               // Australian mobiles: 0412 345 678 -> +61412345678
+  const s = raw.replace(/[^\d+]/g, "");
+  if (s.startsWith("+")) return s;
+  if (s.startsWith("61")) return "+" + s;
+  if (s.startsWith("0")) return "+61" + s.slice(1);
+  return s;
+}
+
+$("#send").addEventListener("click", async () => {
+  if (!ready()) return;
+  const svc = SERVICES.find(s => s.id === st.svc);
+  const whenMelb = `${dayLong(st.slot, SARAH_TZ)} at ${timeStr(st.slot, SARAH_TZ)} (Melbourne time)`;
+  const name = $("#f-name").value.trim(), phone = $("#f-phone").value.trim(), notes = $("#f-notes").value.trim();
+  const text = `Hi Sarah, I'd like to book: ${svc.name} (${svc.mins} min), ${whenMelb}. Name: ${name}. Mobile: ${phone}.` + (notes ? ` Notes: ${notes}` : "");
+  const done = $("#done"); done.textContent = "";
+  const sum = document.createElement("p"); sum.className = "sum";
+  const b = document.createElement("b"); b.textContent = `${svc.name}, ${dayLong(st.slot, myTz)} at ${timeStr(st.slot, myTz)}`;
+
+  // 1) try to send it straight to Sarah
+  $("#send").disabled = true; $("#send").textContent = "Sending…";
+  let sent = false;
+  try {
+    const body = new URLSearchParams({
+      service: `${svc.name} (${svc.mins} min)`, when_melb: whenMelb, name, phone: toE164(phone),
+      notes: notes || "none", website: $("#f-website").value
+    });
+    const res = await fetch(BOOKING_HOOK, { method: "POST", body });
+    sent = res.ok;
+  } catch (e) { sent = false; }
+  $("#send").textContent = "Send booking request";
+
+  if (sent) {
+    sum.append(b, "Request sent. Sarah will text you on " + phone + " once she's confirmed it.");
+    done.append(sum);
+    done.hidden = false; $("#send").hidden = true;
+    done.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+
+  // 2) if that didn't work, let them text it themselves
+  $("#send").disabled = false;
+  sum.append(b, "We couldn't send it automatically. Tap below to text it to Sarah instead.");
+  const sms = document.createElement("a"); sms.className = "btn wide"; sms.href = `sms:${SARAH_SMS}?&body=${encodeURIComponent(text)}`; sms.textContent = "Text Sarah";
+  const toast = document.createElement("p"); toast.className = "toast"; toast.setAttribute("aria-live", "polite");
+  const copy = document.createElement("button"); copy.className = "link"; copy.type = "button"; copy.textContent = "Copy message instead";
+  copy.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(text); toast.textContent = "Copied. Send it to 0411 574 180."; }
+    catch (e) { toast.textContent = text; }
+  });
+  const small = document.createElement("p"); small.className = "small"; small.append("Sarah's mobile: 0411 574 180 · ", copy);
+  done.append(sum, sms, small, toast);
+  done.hidden = false; $("#send").hidden = true;
+  done.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+/* ---------- views ---------- */
+function route() {
+  const book = location.hash === "#book";
+  $("#view-book").hidden = !book; $("#view-home").hidden = book;
+  if (book) { $("#send").hidden = false; $("#done").hidden = true; render(); }
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+route();
+</script>
+
+</body></html>
